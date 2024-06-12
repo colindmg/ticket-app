@@ -3,32 +3,43 @@ import PriorityDisplay from "./PriorityDisplay";
 import ProgressDisplay from "./ProgressDisplay";
 import StatusDisplay from "./StatusDisplay";
 
-const TicketCard = () => {
+const TicketCard = ({ ticket }) => {
+  const formatTimeStamp = (timestamp) => {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    };
+
+    const date = new Date(timestamp);
+    return date.toLocaleDateString("fr-FR", options);
+  };
+
   return (
-    <div className="flex flex-col bg-card rounded-lg border border-neutral-300 p-3">
+    <div className="flex flex-col bg-card rounded-lg border border-neutral-300 p-5">
       <div className="flex mb-3">
-        <PriorityDisplay />
+        <PriorityDisplay priority={ticket.priority} />
         <div className="ml-auto">
           <DeleteBlock />
         </div>
       </div>
 
-      <h4 className="text-xl font-semibold">Ticket Title</h4>
+      <h4 className="text-xl font-semibold">{ticket.title}</h4>
       <hr className="bg-neutral-300 my-2 h-px" />
-      <p className="whitespace-pre-wrap">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo deserunt
-        voluptas eligendi laudantium
-      </p>
+      <p className="whitespace-pre-wrap">{ticket.description}</p>
 
       <div className="flex-grow"></div>
 
       <div className="flex mt-2 ">
         <div className="flex flex-col">
-          <p className="text-xs my-1">08/31/23 10:37PM</p>
-          <ProgressDisplay />
+          <p className="text-xs my-1">{formatTimeStamp(ticket.createdAt)}</p>
+          <ProgressDisplay progress={ticket.progress} />
         </div>
         <div className="ml-auto flex items-end">
-          <StatusDisplay />
+          <StatusDisplay status={ticket.status} />
         </div>
       </div>
     </div>
