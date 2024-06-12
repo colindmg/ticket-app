@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer {
+@layer base {
   h1,
   h2,
   h3,
@@ -34,6 +34,18 @@
 
   p {
     @apply text-sm text-nav;
+  }
+
+  form {
+    @apply rounded-lg p-4;
+  }
+  label {
+    @apply mt-4;
+  }
+  input,
+  select,
+  textarea {
+    @apply m-1 rounded-sm bg-white p-1;
   }
 }
 
